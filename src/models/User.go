@@ -6,18 +6,18 @@ import (
 )
 
 type User struct {
-	UserId      string `json:"userId"`
-	UserName    string `json:"userName"`
-	Description string `json:"description"`
-	PhotoURL    string `json:"photoURL"`
-	Email       string `json:"email"`
+	UserId      string `json:"userId" bson:"userId"`
+	UserName    string `json:"userName" bson:"userName"`
+	Description string `json:"description" bson:"description"`
+	ImageUrl    string `json:"imageUrl" bson:"imageUrl"`
+	Email       string `json:"email" bson:"email"`
 }
 
 // constructor
 func NewUser(
 	userName string,
 	description string,
-	photoURL string,
+	ImageUrl string,
 	email string) (*User, error) {
 
 	// validate
@@ -27,8 +27,8 @@ func NewUser(
 	if description == "" {
 		return &User{"", "", "", "", ""}, errors.New("description is empty")
 	}
-	if photoURL == "" {
-		return &User{"", "", "", "", ""}, errors.New("photoURL is empty")
+	if ImageUrl == "" {
+		return &User{"", "", "", "", ""}, errors.New("ImageUrl is empty")
 	}
 	if email == "" {
 		return &User{"", "", "", "", ""}, errors.New("email is empty")
@@ -38,7 +38,7 @@ func NewUser(
 		UserId:      uuid.New().String(),
 		UserName:    userName,
 		Description: description,
-		PhotoURL:    photoURL,
+		ImageUrl:    ImageUrl,
 		Email:       email}, nil
 }
 

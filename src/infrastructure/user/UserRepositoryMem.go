@@ -5,7 +5,6 @@ import (
 	"app/src/models"
 	"app/src/conf"
 	"gopkg.in/mgo.v2/bson"
-	"fmt"
 )
 
 type UserRepositoryMem struct {
@@ -13,16 +12,13 @@ type UserRepositoryMem struct {
 }
 
 func NewUserRepositoryMem() UserRepository {
-	conf.ConnectDB()
-	var AllUsers []*models.User // フィールド定義時にこれを使う
-	query := conf.GetCollection("users").Find(bson.M{})
-	query.All(&AllUsers)
-	fmt.Print(&AllUsers)
-	return &UserRepositoryMem{AllUsers}
+	return &UserRepositoryMem{[]*models.User{}}
 }
 
 // store event to repository
 func (self *UserRepositoryMem) Store(user *models.User) UserRepository {
+	conf.ConnectDB()
+	// conf.GetCollection("users").Insert(&models.User{self.users})
 	self.users = append(self.users, user)
 	return self
 }
@@ -38,5 +34,8 @@ func (self UserRepositoryMem) FindById(userId string) (*models.User, error) {
 }
 
 func (self UserRepositoryMem) UserList() []*models.User {
+	conf.ConnectDB()
+	query := conf.GetCollection("users").Find(bson.M{})
+	query.All(&self.users)
 	return self.users
 }

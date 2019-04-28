@@ -16,7 +16,7 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 		"description": &graphql.Field{
 			Type: graphql.String,
 		},
-		"photoURL": &graphql.Field{
+		"imageUrl": &graphql.Field{
 			Type: graphql.String,
 		},
 		"email": &graphql.Field{
@@ -37,7 +37,7 @@ var UserInput = graphql.NewInputObject(graphql.InputObjectConfig{
 		"description": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
-		"photoURL": &graphql.InputObjectFieldConfig{
+		"imageUrl": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
 		"email": &graphql.InputObjectFieldConfig{

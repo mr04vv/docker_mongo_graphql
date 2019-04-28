@@ -6,16 +6,31 @@ services:
       - ./src:/go/src/app
     ports:
       - 1323:1323
-    networks:
-      - dockerdb_default
+    depends_on:
+      - mongodb
     environment:
-      MYSQL_DB_HOST: db
-      MYSQL_DB: graphQL
-      MYSQL_PORT: 3306
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-
-networks:
-    dockerdb_default:
-        external: true
+      MONGO_DB_HOST: mongodb
+      MONGO_PORT: 27017
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      -  'MONGODB_USER=root' 
+      -  'MONGODB_PASS=root'
+    volumes:
+      - './docker/mongo:/data/db'
+    ports:
+      - '27017:27017'
+    command: mongod --smallfiles  
+  mongo-express:
+    container_name: mongo-express
+    links:
+      - 'mongodb:mongo'
+    ports:
+      - '8083:8081'
+    environment:
+      - 'ME_CONFIG_OPTIONS_EDITORTHEME=ambiance'
+      - 'ME_CONFIG_BASICAUTH_USERNAME=root'
+      - 'ME_CONFIG_BASICAUTH_PASSWORD=root'
+    image: mongo-express
     

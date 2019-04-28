@@ -48,7 +48,7 @@ var CreateUserField = &graphql.Field{
 		"description": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
-		"photoURL": &graphql.ArgumentConfig{
+		"imageUrl": &graphql.ArgumentConfig{
 			Type: graphql.NewNonNull(graphql.String),
 		},
 		"email": &graphql.ArgumentConfig{
@@ -58,10 +58,10 @@ var CreateUserField = &graphql.Field{
 	Resolve: func(params graphql.ResolveParams) (interface{}, error) {
 		userName, _ := params.Args["userName"].(string)
 		description, _ := params.Args["description"].(string)
-		photoURL, _ := params.Args["photoURL"].(string)
+		imageUrl, _ := params.Args["imageUrl"].(string)
 		email, _ := params.Args["email"].(string)
 
-		newUser, err := models.NewUser(userName, description, photoURL, email)
+		newUser, err := models.NewUser(userName, description, imageUrl, email)
 		if err != nil {
 			panic(err)
 		}
