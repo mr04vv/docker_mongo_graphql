@@ -18,7 +18,7 @@ func NewUserRepositoryMem() UserRepository {
 // store event to repository
 func (self *UserRepositoryMem) Store(user *models.User) UserRepository {
 	conf.ConnectDB()
-	// conf.GetCollection("users").Insert(&models.User{self.users})
+	conf.GetCollection("users").Insert(&models.User{"s","s","s","s","s"})
 	self.users = append(self.users, user)
 	return self
 }

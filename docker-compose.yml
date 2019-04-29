@@ -8,6 +8,7 @@ services:
       - 1323:1323
     depends_on:
       - mongodb
+      - mongo-express
     environment:
       MONGO_DB_HOST: mongodb
       MONGO_PORT: 27017

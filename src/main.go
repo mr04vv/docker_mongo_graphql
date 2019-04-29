@@ -46,6 +46,7 @@ func main() {
 		}
 
 		// query 実行
+		w.Header().Set("Content-Type", "application/json")
 		result := executeQuery(fmt.Sprintf("%s", body), graphql_util.Schema)
 		fmt.Print(result)
 		json.NewEncoder(w).Encode(result)
