@@ -6,6 +6,7 @@ GoのGraphQLとmongoDBをつないでAPIサーバーを立てたリポジトリ
 ```
 docker-compose up -d
 ```
+なぜか`mongo-express`の起動がうまくいかないので2回やってください
 
 ## mongoDB確認
 mongoDBのGUIクライアント(mongo-express)を起動
