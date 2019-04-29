@@ -7,6 +7,17 @@ GoのGraphQLとmongoDBをつないでAPIサーバーを立てたリポジトリ
 docker-compose up -d
 ```
 
+## mongoDB確認
+mongoDBのGUIクライアント(mongo-express)を起動
+http://localhost:8083　で開く
+
+test→users
+で今回使ってるデータを確認できます
+
+![m](https://user-images.githubusercontent.com/24749358/56904443-328c1700-6ad9-11e9-9845-fed2a8cddec6.png)
+
+
+
 ## APIを叩く方法
 
 ### curlコマンド
@@ -42,7 +53,7 @@ curl -H 'Content-Type:application/json' -X POST -d 'mutation{createUser(userName
 }
 ```
 - Response
-  <img src="/Users/mooriii/Desktop/list.png" />
+![list](https://user-images.githubusercontent.com/24749358/56904465-3ddf4280-6ad9-11e9-9223-bb98cb141ec4.png)
 
 - 例2
 ```
@@ -55,7 +66,8 @@ curl -H 'Content-Type:application/json' -X POST -d 'mutation{createUser(userName
 }
 ```
 - Response
-  <img src="/Users/mooriii/Desktop/list2.png" />
+![list2](https://user-images.githubusercontent.com/24749358/56904468-3fa90600-6ad9-11e9-894f-071d459f3834.png)
+
 
 #### User
 - Request Body (各カラムを消したりするとほしいデータのみ取れます)
@@ -70,7 +82,24 @@ curl -H 'Content-Type:application/json' -X POST -d 'mutation{createUser(userName
 }
 ```
 - Response
-  <img src="/Users/mooriii/Desktop/id.png" />
+![id](https://user-images.githubusercontent.com/24749358/56904512-594a4d80-6ad9-11e9-9a45-0cd41b3a3a06.png)
+
+#### CreateUser
+- Request Body (各カラムを消したりするとほしいデータのみ取れます)
+- 例
+
+```
+mutation {
+  createUser(userName:"a",description:"b",email:"c@d.com",imageUrl:"e") {
+    userName
+    email
+  }
+}
+```
+
+- Response
+![cre2](https://user-images.githubusercontent.com/24749358/56904540-7252fe80-6ad9-11e9-8402-0797c2d26fd6.png)
+
 
 ### Graphiql
 GraphQL用の実行クライアント兼ドキュメント
@@ -81,4 +110,5 @@ http://localhost:8083
 
 画像はUserをcmd+クリックしたときに出てきたUserのドキュメントです
 
-<img src="/Users/mooriii/Desktop/g.png" />
+
+![g](https://user-images.githubusercontent.com/24749358/56904617-a3cbca00-6ad9-11e9-8db0-263ef1d19e81.png)
