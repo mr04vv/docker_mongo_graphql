@@ -10,7 +10,5 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 	Fields: graphql.Fields{
 		"user":      fields.UserField,
 		"userList":  fields.UserListField,
-		"event":     fields.EventField,
-		"eventList": fields.EventListField,
 	},
 })

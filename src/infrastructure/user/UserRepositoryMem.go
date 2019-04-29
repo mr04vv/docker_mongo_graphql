@@ -18,14 +18,17 @@ func NewUserRepositoryMem() UserRepository {
 // store event to repository
 func (self *UserRepositoryMem) Store(user *models.User) UserRepository {
 	conf.ConnectDB()
-	conf.GetCollection("users").Insert(&models.User{"s","s","s","s","s"})
+	conf.GetCollection("users").Insert(user)
 	self.users = append(self.users, user)
 	return self
 }
 
 func (self UserRepositoryMem) FindById(userId string) (*models.User, error) {
+	conf.ConnectDB()
+	query := conf.GetCollection("users").Find(bson.M{})
+	query.All(&self.users)
 	for _, val := range self.users {
-		if val.UserId == userId {
+		if val.Id.Hex() == userId {
 			return val, nil
 		}
 	}

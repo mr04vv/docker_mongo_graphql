@@ -7,7 +7,7 @@ import (
 var UserType = graphql.NewObject(graphql.ObjectConfig{
 	Name: "User",
 	Fields: graphql.Fields{
-		"userId": &graphql.Field{
+		"id": &graphql.Field{
 			Type: graphql.String,
 		},
 		"userName": &graphql.Field{
@@ -28,7 +28,7 @@ var UserType = graphql.NewObject(graphql.ObjectConfig{
 var UserInput = graphql.NewInputObject(graphql.InputObjectConfig{
 	Name: "user",
 	Fields: graphql.InputObjectConfigFieldMap{
-		"userId": &graphql.InputObjectFieldConfig{
+		"id": &graphql.InputObjectFieldConfig{
 			Type: graphql.String,
 		},
 		"userName": &graphql.InputObjectFieldConfig{

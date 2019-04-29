@@ -2,11 +2,11 @@ package models
 
 import (
 	"errors"
-	"github.com/google/uuid"
+	"github.com/globalsign/mgo/bson"
 )
 
 type User struct {
-	UserId      string `json:"userId" bson:"userId"`
+	Id      	bson.ObjectId `json:"_id" bson:"_id"`
 	UserName    string `json:"userName" bson:"userName"`
 	Description string `json:"description" bson:"description"`
 	ImageUrl    string `json:"imageUrl" bson:"imageUrl"`
@@ -17,7 +17,7 @@ type User struct {
 func NewUser(
 	userName string,
 	description string,
-	ImageUrl string,
+	imageUrl string,
 	email string) (*User, error) {
 
 	// validate
@@ -27,23 +27,23 @@ func NewUser(
 	if description == "" {
 		return &User{"", "", "", "", ""}, errors.New("description is empty")
 	}
-	if ImageUrl == "" {
-		return &User{"", "", "", "", ""}, errors.New("ImageUrl is empty")
+	if imageUrl == "" {
+		return &User{"", "", "", "", ""}, errors.New("imageUrl is empty")
 	}
 	if email == "" {
 		return &User{"", "", "", "", ""}, errors.New("email is empty")
 	}
 
 	return &User{
-		UserId:      uuid.New().String(),
+		Id:      bson.NewObjectId(),
 		UserName:    userName,
 		Description: description,
-		ImageUrl:    ImageUrl,
+		ImageUrl:    imageUrl,
 		Email:       email}, nil
 }
 
 func (user *User) Equals(other User) bool {
-	if user.UserId == other.UserId {
+	if user.Id == other.Id {
 		return true
 	}
 	return false
